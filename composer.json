@@ -17,6 +17,12 @@
             "homepage": "https://github.com/nfephp-org/sped-cte/graphs/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:mmrenato/mm-sped-common.git"
+        }
+    ],
     "require": {
         "php" : "~5.5|~7.0",
         "mmrenato/mm-sped-common" : "v4.1",
