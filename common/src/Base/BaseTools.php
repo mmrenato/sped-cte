@@ -1,5 +1,6 @@
 <?php
-namespace NFePHP\CTe;
+
+namespace MMNFePHP\Common\Base;
 
 /**
  * Classe base das classes principais para a comunicação com a SEFAZ
@@ -10,10 +11,6 @@ namespace NFePHP\CTe;
  * @license    http://www.gnu.org/licenses/lesser.html LGPL v3
  * @author     Roberto L. Machado <linux.rlm at gmail dot com>
  * @link       http://github.com/nfephp-org/nfephp for the canonical source repository
- *
- *        CONTRIBUIDORES (em ordem alfabetica):
- *
- *          Maison K. Sakamoto <maison.sakamoto at gmail do com>
  */
 
 use MMNFePHP\Common\Certificate\Pkcs12;
@@ -24,8 +21,7 @@ use MMNFePHP\Common\Files;
 use MMNFePHP\Common\Exception;
 
 if (!defined('NFEPHP_ROOT')) {
-    //define('NFEPHP_ROOT', dirname(dirname(dirname(__FILE__))));
-    define('NFEPHP_ROOT', dirname(dirname(__FILE__)));
+    define('NFEPHP_ROOT', dirname(dirname(dirname(__FILE__))));
 }
 
 class BaseTools
@@ -92,7 +88,7 @@ class BaseTools
      * @var int
      */
     public $soapTimeout = 10;
-
+    
     /**
      * oCertificate
      * @var Object Class
@@ -148,7 +144,7 @@ class BaseTools
      * urlOperation
      * @var string
      */
-    protected $urlOperation = 'cte';
+    protected $urlOperation = '';
     /**
      * urlNamespace
      * @var string
@@ -161,10 +157,10 @@ class BaseTools
     protected $urlHeader = '';
     /**
      * modelo da NFe 55 ou 65
-     * modelo da CTe 57
      * @var string
      */
-    protected $modelo = '57';
+    protected $modelo = '55';
+    
     /**
      * cUFlist
      * @var array
@@ -200,7 +196,7 @@ class BaseTools
         'TO'=>'17',
         'SVAN' => '91'
     );
-
+    
     /**
      * __construct
      * @param string $configJson
@@ -227,7 +223,7 @@ class BaseTools
         if (key_exists('aMailConf', $this->aConfig)) {
             $this->aMailConf  = (array) $this->aConfig['aMailConf'];
         }
-
+        
         //seta o timezone
         DateTime::tzdBR($this->aConfig['siglaUF']);
         //carrega os certificados
@@ -263,7 +259,7 @@ class BaseTools
             }
         }
     }
-
+    
     /**
      * setSSLProtocol
      * Força o uso de um determinado protocolo de encriptação
@@ -300,7 +296,7 @@ class BaseTools
             $this->zLoadSoapClass();
         }
     }
-
+    
     /**
      * getSSLProtocol
      * Retrona o protocolo que está setado
@@ -311,7 +307,7 @@ class BaseTools
         $aPr = array('default','TLSv1','SSLv2','SSLv3','TLSv1.0','TLSv1.1','TLSv1.2');
         return $aPr[$this->sslProtocol];
     }
-
+    
     /**
      * setSoapTimeOut
      * @param integer $segundos
@@ -323,7 +319,7 @@ class BaseTools
             $this->zLoadSoapClass();
         }
     }
-
+    
     /**
      * getSoapTimeOut
      * @return integer
@@ -332,7 +328,7 @@ class BaseTools
     {
         return $this->soapTimeout;
     }
-
+    
     /**
      * setAmbiente
      * Seta a varável de ambiente
@@ -345,7 +341,7 @@ class BaseTools
             $this->ambiente = 'producao';
         }
     }
-
+    
     /**
      * atualizaCertificado
      * @param string $certpfx certificado pfx em string ou o path para o certificado
@@ -365,7 +361,7 @@ class BaseTools
         $this->zLoadSoapClass();
         return true;
     }
-
+    
     /**
      * assinaDoc
      * @param string $xml
@@ -407,7 +403,7 @@ class BaseTools
         }
         return $sxml;
     }
-
+    
     /**
      * setVerAplic
      * @param string $versao
@@ -431,7 +427,7 @@ class BaseTools
             $this->sslProtocol
         );
     }
-
+    
     /**
      * zLoadServico
      * Monta o namespace e o cabecalho da comunicação SOAP
@@ -460,7 +456,7 @@ class BaseTools
         }
         $this->urlcUF = $this->getcUF($siglaUF);
         $pathXmlUrlFile = $this->zGetXmlUrlPath($tipo);
-
+        
         if ($this->enableSVCAN) {
             $aURL = self::zLoadSEFAZ($pathXmlUrlFile, $tpAmb, 'SVCAN');
         } elseif ($this->enableSVCRS) {
@@ -468,7 +464,6 @@ class BaseTools
         } else {
             $aURL = self::zLoadSEFAZ($pathXmlUrlFile, $tpAmb, $siglaUF, $tipo);
         }
-
         //recuperação da versão
         $this->urlVersion = $aURL[$service]['version'];
         //recuperação da url do serviço
@@ -477,15 +472,12 @@ class BaseTools
         $this->urlMethod = $aURL[$service]['method'];
         //montagem do namespace do serviço
         $this->urlOperation = $aURL[$service]['operation'];
-        //montagem do namespace do serviço
         $this->urlNamespace = sprintf("%s/wsdl/%s", $this->urlPortal, $this->urlOperation);
-
         //montagem do cabeçalho da comunicação SOAP
         $this->urlHeader = $this->zMountHeader($tipo, $this->urlNamespace, $this->urlcUF, $this->urlVersion);
-
         return true;
     }
-
+    
     /**
      * zGetXmlUrlPath
      * @param string $tipo
@@ -508,16 +500,16 @@ class BaseTools
         } elseif ($tipo == 'cle') {
             $path = $this->aConfig['pathXmlUrlFileCLe'];
         }
-
+        
         $pathXmlUrlFile = NFEPHP_ROOT
             . DIRECTORY_SEPARATOR
             . 'config'
             . DIRECTORY_SEPARATOR
             . $path;
-
+        
         return $pathXmlUrlFile;
     }
-
+    
     /**
      * zMountHeader
      * @param string $tipo
@@ -550,7 +542,7 @@ class BaseTools
         }
         return $header;
     }
-
+    
     /**
      * zLoadSEFAZ
      * Extrai o URL, nome do serviço e versão dos webservices das SEFAZ de
@@ -613,7 +605,7 @@ class BaseTools
             'SVRS'=>'SVRS',
             'SVCAN'=>'SVCAN',
         );
-
+        
         $autorizadores['55'] = array(
             'AC'=>'SVRS',
             'AL'=>'SVRS',
@@ -649,19 +641,14 @@ class BaseTools
             'SVCRS'=>'SVCRS'
         );
 
-        //Estados que utilizam a SVSP - Sefaz Virtual de São Paulo: AP, PE, RR
-        //Estados que utilizam a SVRS - Sefaz Virtual do RS:
-        //AC, AL, AM, BA, CE, DF, ES, GO, MA,
-        //PA, PB, PI, RJ, RN, RO, SC, SE, TO
-        //Autorizadores: MT - MS - MG - PR - RS - SP - SVRS - SVSP
         $autorizadores['57'] = array(
             'AC'=>'SVRS',
             'AL'=>'SVRS',
-            'AM'=>'SVRS',
+            'AM'=>'AM',
             'AN'=>'AN',
-            'AP'=>'SVSP',
+            'AP'=>'SVRS',
             'BA'=>'SVRS',
-            'CE'=>'SVRS',
+            'CE'=>'CE',
             'DF'=>'SVRS',
             'ES'=>'SVRS',
             'GO'=>'SVRS',
@@ -669,7 +656,7 @@ class BaseTools
             'MG'=>'MG',
             'MS'=>'MS',
             'MT'=>'MT',
-            'PA'=>'SVSP',
+            'PA'=>'SVRS',
             'PB'=>'SVRS',
             'PE'=>'PE',
             'PI'=>'SVRS',
@@ -677,7 +664,7 @@ class BaseTools
             'RJ'=>'SVRS',
             'RN'=>'SVRS',
             'RO'=>'SVRS',
-            'RR'=>'SVSP',
+            'RR'=>'SVRS',
             'RS'=>'RS',
             'SC'=>'SVRS',
             'SE'=>'SVRS',
@@ -687,6 +674,7 @@ class BaseTools
             'SVRS'=>'SVRS',
             'SVCAN'=>'SVCAN',
         );
+
         //variável de retorno do método
         $aUrl = array();
         //testa parametro tpAmb
@@ -708,7 +696,7 @@ class BaseTools
         }
         return $aUrl;
     }
-
+    
     /**
      * zExtractUrl
      * @param \SimpleXMLElement $xmlWS
@@ -733,7 +721,7 @@ class BaseTools
         }
         return $aUrl;
     }
-
+    
     /**
      * zGravaFile
      * Grava os dados no diretorio das NFe
@@ -780,7 +768,7 @@ class BaseTools
     {
         return $this->cUFlist[$siglaUF];
     }
-
+    
     /**
      * zGetSigla
      * @param string $cUF

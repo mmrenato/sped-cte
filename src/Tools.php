@@ -2,12 +2,12 @@
 
 namespace NFePHP\CTe;
 
-use NFePHP\Common\DateTime\DateTime;
-use NFePHP\Common\Dom\Dom;
-use NFePHP\Common\Dom\ValidXsd;
-use NFePHP\Common\Exception;
-use NFePHP\Common\LotNumber\LotNumber;
-use NFePHP\Common\Strings\Strings;
+use MMNFePHP\Common\DateTime\DateTime;
+use MMNFePHP\Common\Dom\Dom;
+use MMNFePHP\Common\Dom\ValidXsd;
+use MMNFePHP\Common\Exception;
+use MMNFePHP\Common\LotNumber\LotNumber;
+use MMNFePHP\Common\Strings\Strings;
 use NFePHP\CTe\Auxiliar\IdentifyCTe;
 use NFePHP\CTe\Auxiliar\Response;
 

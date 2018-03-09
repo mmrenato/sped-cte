@@ -13,7 +13,7 @@ namespace NFePHP\CTe\Auxiliar;
  * @link      http://github.com/nfephp-org/nfephp for the canonical source repository
  */
 
-use NFePHP\Common\Identify\Identify;
+use MMNFePHP\Common\Identify\Identify;
 
 class IdentifyCTe
 {
