@@ -8,8 +8,8 @@ use MMNFePHP\Common\Dom\ValidXsd;
 use MMNFePHP\Common\Exception;
 use MMNFePHP\Common\LotNumber\LotNumber;
 use MMNFePHP\Common\Strings\Strings;
-use NFePHP\CTe\Auxiliar\IdentifyCTe;
-use NFePHP\CTe\Auxiliar\Response;
+use MMNFePHP\CTe\Auxiliar\IdentifyCTe;
+use MMNFePHP\CTe\Auxiliar\Response;
 
 /**
  * Classe principal para a comunicação com a SEFAZ
