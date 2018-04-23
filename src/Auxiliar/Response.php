@@ -1,6 +1,6 @@
 <?php
 
-namespace NFePHP\CTe\Auxiliar;
+namespace MMNFePHP\CTe\Auxiliar;
 
 /**
  * Classe auxiliar com funções de DOM extendidas
