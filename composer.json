@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-          "NFePHP\\CTe\\": "src/"
+          "MM\\NFePHP\\CTe\\": "src/"
         } 
     },
     "autoload-dev": {
