@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-          "NFePHP\\CTe\\": "src/",
+          "MMNFePHP\\CTe\\": "src/",
           "MMNFePHP\\Common\\": "common/src/"
         } 
     },
     "autoload-dev": {
         "psr-4": {
-            "NFePHP\\CTe\\Tests\\": "tests/"
+            "MMNFePHP\\CTe\\Tests\\": "tests/"
         }
     },
     "scripts": {

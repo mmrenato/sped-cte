@@ -1,5 +1,5 @@
 <?php
-namespace NFePHP\CTe;
+namespace MMNFePHP\CTe;
 
 /**
  * Classe base das classes principais para a comunicação com a SEFAZ
@@ -671,7 +671,7 @@ class BaseTools
             'MT'=>'MT',
             'PA'=>'SVSP',
             'PB'=>'SVRS',
-            'PE'=>'PE',
+            'PE'=>'SVSP',
             'PI'=>'SVRS',
             'PR'=>'PR',
             'RJ'=>'SVRS',
