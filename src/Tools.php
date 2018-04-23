@@ -1,6 +1,6 @@
 <?php
 
-namespace NFePHP\CTe;
+namespace MMNFePHP\CTe;
 
 use MMNFePHP\Common\DateTime\DateTime;
 use MMNFePHP\Common\Dom\Dom;
